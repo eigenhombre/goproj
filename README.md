@@ -8,6 +8,6 @@ A trivial little Go program that generates trivial little Go programs.
 
 - Check out this repo, `go install` in it; or, `go get github.com/eigenhombre/goproj`
 - `goproj <projname>`
-- `cd <projname>`
+- `cd $GOPATH/<projname>`
 - `go test`
 - `go run .`
