@@ -1,6 +1,6 @@
 # goproj
 
-<img src="/goproj.jpeg" width="400">
+<img src="/goproj.jpg" width="400">
 
 A trivial little Go program that generates trivial little Go programs.
 
