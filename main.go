@@ -17,6 +17,27 @@ func main() {
 	fmt.Println("OK")
 }
 `
+	TESTTXT = `package main
+
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
+
+func TestMainChangeMyName(t *testing.T) {
+	var tests = []struct {
+		input  int
+		output int
+	}{
+		{1, 2},
+		{2, 4},
+	}
+	for _, test := range tests {
+		assert.Equal(t, test.output, 2*test.input)
+	}
+}
+`
 )
 
 // func projName(r *rand.Rand) string {
@@ -49,11 +70,19 @@ func main() {
 
 	modCmd := exec.Command("go", "mod", "init", PROJBASE+proj)
 	modOut, err := modCmd.CombinedOutput()
+	fmt.Println(string(modOut))
 	check(err)
 
 	err = os.WriteFile("main.go", []byte(MAINTXT), 0644)
 	check(err)
 
-	fmt.Println(string(modOut))
+	err = os.WriteFile("main_test.go", []byte(TESTTXT), 0644)
+	check(err)
+
+	tidyCmd := exec.Command("go", "mod", "tidy")
+	tidyOut, err := tidyCmd.CombinedOutput()
+	check(err)
+	fmt.Println(string(tidyOut))
+
 	fmt.Println("OK (" + proj + ")")
 }
